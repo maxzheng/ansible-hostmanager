@@ -18,16 +18,20 @@ def main():
     pass
 
 
-@main.command()
+@main.command('list')
 @click.argument('partial_name', required=False)
-def list(partial_name):
+@click.option('--name-only', is_flag=True, help='Show the hostname only')
+def list_hosts(partial_name, name_only):
     """ List all hosts where name contains optional partial name """
     inventory = _get_inventory()
 
     hosts = []
     pattern = f'*{partial_name}*' if partial_name else 'all'
     for host in inventory.list_hosts(pattern):
-        hosts.append([host.name, host.vars.get('ansible_host'), host.groups])
+        if name_only:
+            hosts.append([host.name])
+        else:
+            hosts.append([host.name, host.vars.get('ansible_host'), host.groups])
 
     if hosts:
         click.echo(tabulate(sorted(hosts), tablefmt='plain'))
@@ -35,20 +39,20 @@ def list(partial_name):
         click.echo('Host Inventory: ' + config.hosts_file)
 
 
-@main.command()
+@main.command(context_settings=dict(ignore_unknown_options=True))
 @click.argument('host')
-def ssh(host):
+@click.argument('ssh_args', nargs=-1, type=click.UNPROCESSED)
+def ssh(host, ssh_args):
     """ Run ssh for the given host """
     inventory = _get_inventory()
 
     hosts = inventory.list_hosts(f'*{host}*')
-
     if hosts:
         if len(hosts) > 1:
             click.echo('Found multiple matches and will use first one: ' + ', '.join(h.name for h in hosts))
 
         try:
-            run(['ssh', hosts[0].vars.get('ansible_host', hosts[0].name)])
+            run(['ssh', hosts[0].vars.get('ansible_host', hosts[0].name)] + list(ssh_args))
 
         except Exception as e:
             pass
