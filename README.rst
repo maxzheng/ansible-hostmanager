@@ -7,14 +7,11 @@ To install::
 
     pip install ansible-hostmanager
 
-After installing, set location to Ansible `hosts` file::
-
-    $ ah set-hosts ~/workspace/infra/cm/hosts
-    Found 4 host(s)
-
 To show hosts::
 
     $ ah list
+    /etc/ansible/hosts exists and will be used. To change, run: ah set-hosts <PATH>
+    Inventory has 4 host(s)
     app-server1         1.2.3.4   [app, all]
     web-server          1.2.3.5   [web, all]
     app-server2         1.2.3.6   [app, all]

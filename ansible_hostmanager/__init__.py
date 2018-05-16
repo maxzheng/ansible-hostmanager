@@ -1,4 +1,5 @@
 import click
+from pathlib import Path
 import sys
 
 from ansible.inventory.manager import InventoryManager
@@ -7,6 +8,9 @@ from tabulate import tabulate
 from utils.process import run
 
 from localconfig import config
+
+
+DEFAULT_HOSTS_FILE = Path('/etc/ansible/hosts')
 
 
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
@@ -54,17 +58,27 @@ def ssh(host):
 @click.argument('hosts_file')
 def set_hosts(hosts_file):
     """ Set hosts file """
+    _set_hosts(hosts_file)
+
+
+def _set_hosts(hosts_file):
     config.hosts_file = hosts_file
     config.save()
 
     inventory = _get_inventory()
 
-    click.echo('Found {} host(s)'.format(len(inventory.hosts)))
+    click.echo('Inventory has {} host(s)'.format(len(inventory.hosts)))
 
 
 def _get_inventory():
     if not config.hosts_file:
-        click.echo('Please set path to Ansible hosts file by running: ah set-hosts <PATH>')
-        sys.exit(1)
+        if DEFAULT_HOSTS_FILE.exists():
+            click.echo('{} exists and will be used. To change, '
+                       'run: ah set-hosts <PATH>'.format(DEFAULT_HOSTS_FILE))
+            _set_hosts(str(DEFAULT_HOSTS_FILE))
+
+        else:
+            click.echo('Please set path to Ansible hosts file by running: ah set-hosts <PATH>')
+            sys.exit(1)
 
     return InventoryManager(loader=DataLoader(), sources=config.hosts_file)
