@@ -35,3 +35,14 @@ To ssh to a host::
     boot
     dev
     ...
+
+Links & Contact Info
+====================
+
+| PyPI Package: https://pypi.python.org/pypi/ansible-hostmanager
+| GitHub Source: https://github.com/maxzheng/ansible-hostmanager
+| Report Issues/Bugs: https://github.com/maxzheng/ansible-hostmanager/issues
+|
+| Follow: https://twitter.com/MaxZhengX
+| Connect: https://www.linkedin.com/in/maxzheng
+| Contact: maxzheng.os @t gmail.com
