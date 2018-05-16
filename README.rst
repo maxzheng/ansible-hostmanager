@@ -30,7 +30,7 @@ To ssh to a host::
     Found multiple matches and will use first one: app-server1, app-server2
     # Runs `ssh 1.2.3.4`
 
-    $ ah ssh app1 ls /
+    $ ah ssh server1 ls /
     bin
     boot
     dev
