@@ -1,0 +1,5 @@
+ansible
+click
+localconfig>=1.1
+tabulate
+utils-core
