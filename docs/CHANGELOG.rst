@@ -1,5 +1,10 @@
-Version 0.1.1
+Version 0.1.2
 ================================================================================
+
+* Add example for running commands via ssh
+
+Version 0.1.1
+--------------------------------------------------------------------------------
 
 * Add --name-only option and allow args to pass thru
 
