@@ -1,5 +1,10 @@
-Version 0.1.0
+Version 0.1.1
 ================================================================================
+
+* Add --name-only option and allow args to pass thru
+
+Version 0.1.0
+--------------------------------------------------------------------------------
 
 * Support default hosts location
 
