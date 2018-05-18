@@ -1,5 +1,11 @@
-Version 0.1.3
+Version 0.1.4
 ================================================================================
+
+* Support exact hostname matching
+* Add contact/link info
+
+Version 0.1.3
+--------------------------------------------------------------------------------
 
 * Fix typo for server name
 
