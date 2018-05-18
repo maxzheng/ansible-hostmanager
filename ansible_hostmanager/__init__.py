@@ -22,12 +22,11 @@ def main():
 @click.argument('partial_name', required=False)
 @click.option('--name-only', is_flag=True, help='Show the hostname only')
 def list_hosts(partial_name, name_only):
-    """ List all hosts where name contains optional partial name """
-    inventory = _get_inventory()
-
+    """ List all hosts optionally filtered by partial name """
     hosts = []
+
     pattern = f'*{partial_name}*' if partial_name else 'all'
-    for host in inventory.list_hosts(pattern):
+    for host in _hosts_matching(pattern):
         if name_only:
             hosts.append([host.name])
         else:
@@ -44,9 +43,7 @@ def list_hosts(partial_name, name_only):
 @click.argument('ssh_args', nargs=-1, type=click.UNPROCESSED)
 def ssh(host, ssh_args):
     """ Run ssh for the given host """
-    inventory = _get_inventory()
-
-    hosts = inventory.list_hosts(f'*{host}*')
+    hosts = _hosts_matching(host)
     if hosts:
         if len(hosts) > 1:
             click.echo('Found multiple matches and will use first one: ' + ', '.join(h.name for h in hosts))
@@ -72,6 +69,16 @@ def _set_hosts(hosts_file):
     inventory = _get_inventory()
 
     click.echo('Inventory has {} host(s)'.format(len(inventory.hosts)))
+
+
+def _hosts_matching(hostname):
+    """ Returns a list of hosts matching the hostname exactly or partially """
+    inventory = _get_inventory()
+
+    if hostname in inventory.hosts:
+        return [inventory.hosts[hostname]]
+    else:
+        return inventory.list_hosts(f'*{hostname}*')
 
 
 def _get_inventory():
