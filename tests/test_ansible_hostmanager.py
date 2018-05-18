@@ -28,6 +28,10 @@ def test_hostmanager(cli_runner, tmpdir, mock_run):
     result = cli_runner.invoke_and_assert_exit(0, main, ['list'])
     assert result.output == 'app1  1.2.3.4  [app_server, all]\napp2           [app_server, all]\n'
 
+    # List name only
+    result = cli_runner.invoke_and_assert_exit(0, main, ['list', '--name-only'])
+    assert result.output == 'app1\napp2\n'
+
     # SSH -- Exact match
     result = cli_runner.invoke_and_assert_exit(0, main, ['ssh', 'app1'])
     mock_run.assert_called_with(['ssh', '1.2.3.4'])
