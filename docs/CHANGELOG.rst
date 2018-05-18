@@ -1,5 +1,11 @@
-Version 0.1.4
+Version 0.1.5
 ================================================================================
+
+* Add test for --name-only
+* Exit with code 1 when ssh fails
+
+Version 0.1.4
+--------------------------------------------------------------------------------
 
 * Support exact hostname matching
 * Add contact/link info
