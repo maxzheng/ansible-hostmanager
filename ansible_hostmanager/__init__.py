@@ -52,7 +52,7 @@ def ssh(host, ssh_args):
             run(['ssh', hosts[0].vars.get('ansible_host', hosts[0].name)] + list(ssh_args))
 
         except Exception as e:
-            pass
+            sys.exit(1)
 
 
 @main.command('set-hosts')

@@ -41,3 +41,9 @@ def test_hostmanager(cli_runner, tmpdir, mock_run):
     result = cli_runner.invoke_and_assert_exit(0, main, ['ssh', 'app'])
     mock_run.assert_called_with(['ssh', '1.2.3.4'])
     assert result.output == 'Found multiple matches and will use first one: app1, app2\n'
+
+    # SSH - Exception
+    mock_run.side_effect = Exception('Kaboom!')
+    result = cli_runner.invoke_and_assert_exit(1, main, ['ssh', 'app1'])
+    mock_run.assert_called_with(['ssh', '1.2.3.4'])
+    assert result.output == ''
