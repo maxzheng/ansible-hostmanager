@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name='ansible-hostmanager',
-    version='0.1.5',
+    version='0.2.0',
 
     author='Max Zheng',
     author_email='maxzheng.os@gmail.com',
