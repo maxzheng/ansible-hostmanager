@@ -73,7 +73,7 @@ def ssh(ssh_args):
         user, host = None, ssh_args[host_index]
 
     # Translate matching hostname and replace
-    hosts = _hosts_matching(host)
+    hosts = sorted(_hosts_matching(host), key=lambda h: h.name)
     if hosts:
         if len(hosts) > 1:
             click.echo('Found multiple matches and will use first one: ' + ', '.join(h.name for h in hosts))

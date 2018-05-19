@@ -15,8 +15,8 @@ To show hosts:
     /etc/ansible/hosts exists and will be used. To change, run: ah set-hosts <PATH>
     Inventory has 4 host(s)
     app-server1         1.2.3.4   [app, all]
-    web-server          1.2.3.5   [web, all]
     app-server2         1.2.3.6   [app, all]
+    web-server          1.2.3.5   [web, all]
     db-server           1.2.3.7   [db, all]
 
     $ ah list app
