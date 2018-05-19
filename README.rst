@@ -7,7 +7,9 @@ To install::
 
     pip install ansible-hostmanager
 
-To show hosts::
+To show hosts:
+
+.. code-block:: console
 
     $ ah list
     /etc/ansible/hosts exists and will be used. To change, run: ah set-hosts <PATH>
@@ -21,7 +23,9 @@ To show hosts::
     app-server1         1.2.3.4   [app, all]
     app-server2         1.2.3.6   [app, all]
 
-To ssh to a host::
+To ssh to a host:
+
+.. code-block:: console
 
     $ ah ssh db
     # Runs `ssh 1.2.3.7`
