@@ -36,6 +36,15 @@ To ssh to a host::
     dev
     ...
 
+    $ ah ssh -i ~/.ssh/alternative_id user@app1
+    # Runs `ssh -i ~/.ssh/alternative_id user@1.2.3.4`
+    # As long as hostname is first, or last, argument, it will get translated.
+
+    # To avoid having to remember `ah ssh` vs `ssh`, just create an `ssh` alias
+    # as any non-Ansible host / args would just be passed to `ssh` without change.
+    $ alias ssh=`ah ssh`
+    $ ssh user@not_ansible_host
+
 Links & Contact Info
 ====================
 
