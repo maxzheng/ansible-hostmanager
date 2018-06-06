@@ -1,5 +1,11 @@
-Version 0.2.3
+Version 0.2.4
 ================================================================================
+
+* Update setup
+* Set default envlist to cover,style
+
+Version 0.2.3
+--------------------------------------------------------------------------------
 
 * Sort hosts for ssh so first host is deterministic
 
