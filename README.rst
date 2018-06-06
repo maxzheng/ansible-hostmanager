@@ -5,7 +5,8 @@ CLI script to work with Ansible hosts file
 
 To install::
 
-    pip install ansible-hostmanager
+    sudo pip3 install autopip
+    app install ansible-hostmanager
 
 To show hosts:
 
